@@ -42,47 +42,57 @@ const reformatB2BResponse = (codelistcodes) => {
     return reformatted;
 };
 
-async function getB2BCodelistEntries(url) 
+async function getB2BCodelistEntries(url, filter, pagination) 
 {
 
     let headers = new Headers({ Accept: 'application/json' });
-    const AuthHeader = localStorage.getItem('AuthHeader');
-    headers.set('Authorization', AuthHeader);
+    const authHeader = localStorage.getItem('AuthHeader');
+    headers.set('Authorization', authHeader);
 
-    let response = await fetch(url, {headers});
-    let data = await response.json();
+    const response = await fetch(url, {headers});
+    const data = await response.json();
+    const reformatted = reformatB2BResponse(data);
+
+    const filteredData =  _.filter(reformatted , (obj) => {
+
+        let filterMatchIndex = 0;
     
-    let reformatted = reformatB2BResponse(data);
-    let _rangeRemovedURL = removeParam("_range", url);
+        for (const [objKey, objValue] of Object.entries(obj)) {
+            for (const [filterKey, filterValue] of Object.entries(filter)) {
+                if(String(objKey) === String(filterKey)){
+                    if(String(objValue).toLowerCase().includes(String(filterValue).toLowerCase())) {
+                        filterMatchIndex = filterMatchIndex + 1
+                    }
+                }
+              }
+        }
+    
+        if(filterMatchIndex === Object.keys(filter).length){
+            return obj
+        }
+    });
 
-    let rangeRemovedResponse = await fetch(_rangeRemovedURL, {headers});
-    let rangeRemovedData = await rangeRemovedResponse.json();  
+    const offset = (pagination.page - 1) * pagination.perPage;
+    const pagedEntries = _.drop(filteredData, offset).slice(0, pagination.perPage);
+
 
     return {
-        data : reformatted,
-        total: rangeRemovedData.length
+        data : pagedEntries,
+        total: filteredData.length
     };
 };
 
 export default {
     getList: (resource, params) => {
-        const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
-        const filter = params.filter;
-  
-        console.log('params',params)
+
         const query = {
             listName: resource,
-            listVersion: -1,
-            _range: JSON.stringify((page - 1) * perPage) + '-' + JSON.stringify(page * perPage - 1),
-            ...filter
-
+            listVersion: -1
         };
+
         const url = `${apiUrl}?${stringify(query)}`;
 
-        console.log('url',url)
-
-        return getB2BCodelistEntries(url)
+        return getB2BCodelistEntries(url, params.filter, params.pagination)
 
     },
 
