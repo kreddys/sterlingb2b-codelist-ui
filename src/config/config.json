@@ -3,23 +3,67 @@
     "codelists": [
         {
             "name" : "EVC_KR_TEST",
-            "label": "TEST"
-        },
-        {
-            "name" : "EVC_KR_TEST2",
-            "label": "TEST2"
+            "label": "TEST",
+            "list": [
+                {
+                    "source": "senderCode",
+                    "label": "senderCode"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "receiverCode"
+                },
+                {
+                    "source": "description",
+                    "label": "description"
+                }
+            ],
+            "filter": [
+                {
+                    "source": "senderCode",
+                    "label": "senderCode"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "receiverCode"
+                },
+                {
+                    "source": "description",
+                    "label": "description"
+                }               
+            ]
         },
         {
             "name" : "EVC_RECEIPT_FILESYSTEM",
-            "label": "RECEIPT_FILESYSTEM"
-        },
-        {
-            "name" : "EVC_RECEIPT_SFTP",
-            "label": "RECEIPT_SFTP"
-        },
-        {
-            "name" : "EVC_BATCH_TRANSLATION",
-            "label": "BATCH_TRANSLATION"
+            "label": "RECEIPT_FILESYSTEM",
+            "list": [
+                {
+                    "source": "senderCode",
+                    "label": "Producer | TransactionType"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],
+            "filter": [
+                {
+                    "source": "senderCode",
+                    "label": "Producer | TransactionType"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }               
+            ]
         }
     ]
 }

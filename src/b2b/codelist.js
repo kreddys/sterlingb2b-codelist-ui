@@ -1,20 +1,28 @@
 import * as React from "react";
 import { List, Datagrid, TextField, Filter, TextInput } from 'react-admin';
 
+const textField = (column => {
+    return  <TextField source= {column.source} label= {column.label}/>
+})
+
+const textInput = (column => {
+    return  <TextInput source= {column.source} label= {column.label}/>
+})
+
 const CLFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Sender Code" source="senderCode" />
-        <TextInput label="Receiver Code" source="receiverCode" />
-        <TextInput label="Description" source="description" />
+        {
+            props.filterprops.map(item => textInput(item))
+        }
     </Filter>
 );
 
 export const CLList = props => (
-    <List {...props} filters={<CLFilter />} bulkActionButtons={false}>
+    <List {...props} filters={<CLFilter filterprops = {props.options.codelist.filter}/>} bulkActionButtons={false}>
         <Datagrid rowClick="edit">
-            <TextField source="senderCode" />
-            <TextField source="receiverCode" />
-            <TextField source="description" />
+        {
+            props.options.codelist.list.map(item => textField(item))
+        }
         </Datagrid>
     </List>
 );
