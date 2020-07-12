@@ -1,0 +1,17 @@
+{
+    "b2b_rest_endpoint" : "http://ehatldv1sfg01.innovate.lan:20074/B2BAPIs/svc/codelistcodes/",
+    "codelists": [
+        {
+            "name" : "EVC_KR_TEST"
+        },
+        {
+            "name" : "EVC_KR_TEST2"
+        },
+        {
+            "name" : "EVC_RECEIPT_FILESYSTEM"
+        },
+        {
+            "name" : "EVC_BATCH_TRANSLATION"
+        }
+    ]
+}
