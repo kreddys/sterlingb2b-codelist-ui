@@ -1,7 +1,8 @@
 import { stringify } from 'query-string';
 import _ from 'lodash';
+import config from '../config/config.json';
 
-const apiUrl = 'http://ehatldv1sfg01.innovate.lan:20074/B2BAPIs/svc/codelistcodes/';
+const apiUrl = config.b2b_rest_endpoint;
 
 function removeParam(key, sourceURL) {
     var rtn = sourceURL.split("?")[0],
@@ -41,18 +42,17 @@ const reformatB2BResponse = (codelistcodes) => {
     return reformatted;
 };
 
-async function b2bGetCodelistEntries(url) 
+async function getB2BCodelistEntries(url) 
 {
 
     let headers = new Headers({ Accept: 'application/json' });
-    headers.set('Authorization', `Basic a3JlZGR5OiR1cGVyTWFyaW80NA==`);
+    const AuthHeader = localStorage.getItem('AuthHeader');
+    headers.set('Authorization', AuthHeader);
 
     let response = await fetch(url, {headers});
     let data = await response.json();
     
     let reformatted = reformatB2BResponse(data);
-
-    let listName = reformatted[0].listName;
     let _rangeRemovedURL = removeParam("_range", url);
 
     let rangeRemovedResponse = await fetch(_rangeRemovedURL, {headers});
@@ -62,20 +62,27 @@ async function b2bGetCodelistEntries(url)
         data : reformatted,
         total: rangeRemovedData.length
     };
-}
+};
 
 export default {
     getList: (resource, params) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
+        const filter = params.filter;
+  
+        console.log('params',params)
         const query = {
             listName: resource,
             listVersion: -1,
-            _range: JSON.stringify((page - 1) * perPage) + '-' + JSON.stringify(page * perPage - 1)
+            _range: JSON.stringify((page - 1) * perPage) + '-' + JSON.stringify(page * perPage - 1),
+            ...filter
+
         };
         const url = `${apiUrl}?${stringify(query)}`;
 
-        return b2bGetCodelistEntries(url)
+        console.log('url',url)
+
+        return getB2BCodelistEntries(url)
 
     },
 

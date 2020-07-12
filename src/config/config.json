@@ -2,16 +2,24 @@
     "b2b_rest_endpoint" : "http://ehatldv1sfg01.innovate.lan:20074/B2BAPIs/svc/codelistcodes/",
     "codelists": [
         {
-            "name" : "EVC_KR_TEST"
+            "name" : "EVC_KR_TEST",
+            "label": "TEST"
         },
         {
-            "name" : "EVC_KR_TEST2"
+            "name" : "EVC_KR_TEST2",
+            "label": "TEST2"
         },
         {
-            "name" : "EVC_RECEIPT_FILESYSTEM"
+            "name" : "EVC_RECEIPT_FILESYSTEM",
+            "label": "RECEIPT_FILESYSTEM"
         },
         {
-            "name" : "EVC_BATCH_TRANSLATION"
+            "name" : "EVC_RECEIPT_SFTP",
+            "label": "RECEIPT_SFTP"
+        },
+        {
+            "name" : "EVC_BATCH_TRANSLATION",
+            "label": "BATCH_TRANSLATION"
         }
     ]
 }
