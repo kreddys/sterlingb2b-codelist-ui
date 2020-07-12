@@ -1,5 +1,6 @@
 {
     "b2b_rest_endpoint" : "http://ehatldv1sfg01.innovate.lan:20074/B2BAPIs/svc/codelistcodes/",
+    "replace_pipe_with" :"*",
     "codelists": [
         {
             "name" : "EVC_KR_TEST",
@@ -19,6 +20,20 @@
                 }
             ],
             "filter": [
+                {
+                    "source": "senderCode",
+                    "label": "senderCode"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "receiverCode"
+                },
+                {
+                    "source": "description",
+                    "label": "description"
+                }               
+            ],
+            "edit": [
                 {
                     "source": "senderCode",
                     "label": "senderCode"
@@ -63,6 +78,58 @@
                     "source": "description",
                     "label": "Description"
                 }               
+            ],            
+            "edit": [
+                {
+                    "source": "senderCode",
+                    "label": "Producer | TransactionType",
+                    "ispipeDelimited": true,
+                    "fields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "Mailbox"
+                },
+                {
+                    "source": "text2",
+                    "label": "CollectionDirectory"
+                },
+                {
+                    "source": "text9",
+                    "label": "FileMask"
+                },
+                {
+                    "source": "text7",
+                    "label": "UnprocessedDirectory"
+                },
+                {
+                    "source": "text3",
+                    "label": "DeleteAfterCollect(Yes|No)"
+                },
+                {
+                    "source": "text4",
+                    "label": "CollectFromSubFolders(Yes|No)"
+                },
+                {
+                    "source": "text5",
+                    "label": "FileModifiedThreshold | PreReceiptBP"
+                },
+                {
+                    "source": "text6",
+                    "label": "CollectZeroByteFiles(Yes|No) | PostReceiptBP"
+                },
+                {
+                    "source": "text8",
+                    "label": "ProcessDiffTransTypes(Yes|No)|ProcessOriginalEDI(Yes|No)"
+                }          
             ]
         }
     ]

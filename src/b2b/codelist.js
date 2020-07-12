@@ -1,13 +1,13 @@
 import * as React from "react";
-import { List, Datagrid, TextField, Filter, TextInput } from 'react-admin';
+import { List, Datagrid, TextField, Filter, TextInput, Edit, SimpleForm } from 'react-admin';
 
 const textField = (column => {
     return  <TextField source= {column.source} label= {column.label}/>
-})
+});
 
 const textInput = (column => {
-    return  <TextInput source= {column.source} label= {column.label}/>
-})
+    return  <TextInput source= {column.source} fullWidth label= {column.label} style = {{height: 50}}/> 
+});
 
 const CLFilter = (props) => (
     <Filter {...props}>
@@ -26,3 +26,13 @@ export const CLList = props => (
         </Datagrid>
     </List>
 );
+
+export const CLEdit = (props) => (
+    <Edit {...props}>
+        <SimpleForm>
+            {
+                props.options.codelist.edit.map(item => textInput(item))
+            }
+        </SimpleForm>
+    </Edit>
+)

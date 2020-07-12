@@ -1,68 +1,8 @@
 import { stringify } from 'query-string';
-import _ from 'lodash';
 import config from '../config/config.json';
+import {getListB2BCodelistEntries, getOneB2BCodelistEntry} from './dataProviderUtils'
 
 const apiUrl = config.b2b_rest_endpoint;
-
-const reformatB2BResponse = (codelistcodes) => {
-
-    const reformatted = [];
-
-    codelistcodes.map( item => {
-        reformatted.push(
-            _.mapKeys( item, ( value, key ) => {
-                let newKey = key;
-                if( key === '_id' ) {
-                    newKey = 'id';
-                }
-
-                return newKey;
-            })
-        )
-    });
-
-    return reformatted;
-};
-
-async function getB2BCodelistEntries(url, filter, pagination) 
-{
-
-    let headers = new Headers({ Accept: 'application/json' });
-    const authHeader = localStorage.getItem('AuthHeader');
-    headers.set('Authorization', authHeader);
-
-    const response = await fetch(url, {headers});
-    const data = await response.json();
-    const reformatted = reformatB2BResponse(data);
-
-    const filteredData =  _.filter(reformatted , (obj) => {
-
-        let filterMatchIndex = 0;
-    
-        for (const [objKey, objValue] of Object.entries(obj)) {
-            for (const [filterKey, filterValue] of Object.entries(filter)) {
-                if(String(objKey) === String(filterKey)){
-                    if(String(objValue).toLowerCase().includes(String(filterValue).toLowerCase())) {
-                        filterMatchIndex = filterMatchIndex + 1
-                    }
-                }
-              }
-        }
-    
-        if(filterMatchIndex === Object.keys(filter).length){
-            return obj
-        }
-    });
-
-    const offset = (pagination.page - 1) * pagination.perPage;
-    const pagedEntries = _.drop(filteredData, offset).slice(0, pagination.perPage);
-
-
-    return {
-        data : pagedEntries,
-        total: filteredData.length
-    };
-};
 
 export default {
     getList: (resource, params) => {
@@ -74,14 +14,14 @@ export default {
 
         const url = `${apiUrl}?${stringify(query)}`;
 
-        return getB2BCodelistEntries(url, params.filter, params.pagination)
+        return getListB2BCodelistEntries(url, params.filter, params.pagination)
 
     },
 
-    // getOne: (resource, params) =>
-    //     httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-    //         data: json,
-    //     })),
+    getOne: (resource, params) => {
+        return getOneB2BCodelistEntry(resource, params)
+    }
+ 
 
     // getMany: (resource, params) => {
     //     const query = {
