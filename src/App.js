@@ -8,7 +8,7 @@ import config from './config/config.json';
 const codelists = config.codelists
 
 const resource = (codelist => {
-    return  <Resource name={codelist.name} list={CLList} edit={CLEdit} options={{ label: codelist.label, codelist }}/>
+    return  <Resource key={codelist.label} name={codelist.name} list={CLList} edit={CLEdit} options={{ label: codelist.label, codelist }}/>
 })
 
 const App = () => (

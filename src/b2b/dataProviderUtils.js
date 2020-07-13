@@ -124,8 +124,6 @@ export const getOneB2BCodelistEntry = async function getOneB2BCodelistEntry(reso
 
     const reformatted = reformatB2BResponse(data);
 
-    console.log('reformatted',reformatted[0])
-
     return {
         data : reformatted[0]
     }

@@ -19,7 +19,8 @@ export default {
     },
 
     getOne: (resource, params) => {
-        return getOneB2BCodelistEntry(resource, params)
+
+        return getOneB2BCodelistEntry(resource, params);
     }
  
 

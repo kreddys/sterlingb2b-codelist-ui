@@ -2,11 +2,11 @@ import * as React from "react";
 import { List, Datagrid, TextField, Filter, TextInput, Edit, SimpleForm } from 'react-admin';
 
 const textField = (column => {
-    return  <TextField source= {column.source} label= {column.label}/>
+    return  <TextField key={column.label} source= {column.source} label= {column.label}/>
 });
 
 const textInput = (column => {
-    return  <TextInput source= {column.source} fullWidth label= {column.label} style = {{height: 50}}/> 
+    return  <TextInput key={column.label} source= {column.source} label= {column.label} style = {{width: 500, height: 50}}/> 
 });
 
 const CLFilter = (props) => (
@@ -17,8 +17,12 @@ const CLFilter = (props) => (
     </Filter>
 );
 
+const CLTitle = ({ props }) => {
+    return <span>{props.resource}</span>;
+        };
+
 export const CLList = props => (
-    <List {...props} filters={<CLFilter filterprops = {props.options.codelist.filter}/>} bulkActionButtons={false}>
+    <List {...props} filters={<CLFilter filterprops = {props.options.codelist.filter}/>} bulkActionButtons={false} title={<CLTitle props= {props}/>}>
         <Datagrid rowClick="edit">
         {
             props.options.codelist.list.map(item => textField(item))
@@ -28,7 +32,8 @@ export const CLList = props => (
 );
 
 export const CLEdit = (props) => (
-    <Edit {...props}>
+
+    <Edit title={<CLTitle props= {props}/>} {...props} key={props.resource}>
         <SimpleForm>
             {
                 props.options.codelist.edit.map(item => textInput(item))
