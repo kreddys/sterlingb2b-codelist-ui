@@ -3,55 +3,9 @@
     "replace_pipe_with" :"*",
     "codelists": [
         {
-            "name" : "EVC_KR_TEST",
-            "label": "TEST",
-            "list": [
-                {
-                    "source": "senderCode",
-                    "label": "senderCode"
-                },
-                {
-                    "source": "receiverCode",
-                    "label": "receiverCode"
-                },
-                {
-                    "source": "description",
-                    "label": "description"
-                }
-            ],
-            "filter": [
-                {
-                    "source": "senderCode",
-                    "label": "senderCode"
-                },
-                {
-                    "source": "receiverCode",
-                    "label": "receiverCode"
-                },
-                {
-                    "source": "description",
-                    "label": "description"
-                }               
-            ],
-            "edit": [
-                {
-                    "source": "senderCode",
-                    "label": "senderCode"
-                },
-                {
-                    "source": "receiverCode",
-                    "label": "receiverCode"
-                },
-                {
-                    "source": "description",
-                    "label": "description"
-                }               
-            ]
-        },
-        {
             "name" : "EVC_RECEIPT_FILESYSTEM",
             "label": "RECEIPT_FILESYSTEM",
-            "list": [
+            "list_and_filter": [
                 {
                     "source": "senderCode",
                     "label": "Producer | TransactionType"
@@ -64,31 +18,19 @@
                     "source": "description",
                     "label": "Description"
                 }
-            ],
-            "filter": [
-                {
-                    "source": "senderCode",
-                    "label": "Producer | TransactionType"
-                },
-                {
-                    "source": "receiverCode",
-                    "label": "Config"
-                },
-                {
-                    "source": "description",
-                    "label": "Description"
-                }               
-            ],            
-            "edit": [
+            ],           
+            "create_and_edit": [
                 {
                     "source": "senderCode",
                     "label": "Producer | TransactionType",
-                    "ispipeDelimited": true,
-                    "fields": 2
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
                 },
                 {
                     "source": "receiverCode",
-                    "label": "Config"
+                    "label": "Config",
+                    "required": true
                 },
                 {
                     "source": "description",
@@ -96,40 +38,1464 @@
                 },
                 {
                     "source": "text1",
-                    "label": "Mailbox"
+                    "label": "Mailbox",
+                    "required": true
                 },
                 {
                     "source": "text2",
-                    "label": "CollectionDirectory"
+                    "label": "CollectionDirectory",
+                    "required": true
                 },
                 {
-                    "source": "text9",
-                    "label": "FileMask"
+                    "source": "text3",
+                    "label": "DeleteAfterCollect(Yes|No)",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "ConnectionZone(INT|DMZ)",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "ChangeDirectory | PreReceiptBP",
+                    "required": true
+                },
+                {
+                    "source": "text6",
+                    "label": "CollectZeroByteFiles(Yes|No) | PostReceiptBP",
+                    "required": true
                 },
                 {
                     "source": "text7",
                     "label": "UnprocessedDirectory"
                 },
                 {
+                    "source": "text8",
+                    "label": "ProcessDiffTransTypes(Yes|No)|ProcessOriginalEDI(Yes|No)",
+                    "required": true
+                },
+                {
+                    "source": "text9",
+                    "label": "FileMask",
+                    "required": true
+                }         
+            ]
+        },      
+        {
+            "name" : "EVC_RECEIPT_SFTP",
+            "label": "RECEIPT_SFTP",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "Producer | TransactionType"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "Producer | TransactionType",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "Mailbox",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "ProfileID",
+                    "required": true
+                },
+                {
                     "source": "text3",
-                    "label": "DeleteAfterCollect(Yes|No)"
+                    "label": "DeleteAfterCollect(Yes|No)",
+                    "required": true
                 },
                 {
                     "source": "text4",
-                    "label": "CollectFromSubFolders(Yes|No)"
+                    "label": "ConnectionZone(INT|DMZ)",
+                    "required": true
                 },
                 {
                     "source": "text5",
-                    "label": "FileModifiedThreshold | PreReceiptBP"
+                    "label": "ChangeDirectory | PreReceiptBP",
+                    "required": true
                 },
                 {
                     "source": "text6",
-                    "label": "CollectZeroByteFiles(Yes|No) | PostReceiptBP"
+                    "label": "CollectZeroByteFiles(Yes|No) | PostReceiptBP",
+                    "required": true
+                },
+                {
+                    "source": "text7",
+                    "label": "UnprocessedDirectory"
+                },
+                {
+                    "source": "text8",
+                    "label": "ProcessDiffTransTypes(Yes|No)|ProcessOriginalEDI(Yes|No)",
+                    "required": true
+                },
+                {
+                    "source": "text9",
+                    "label": "FileMask",
+                    "required": true
+                }         
+            ]
+        },      
+        {
+            "name" : "EVC_RECEIPT_FTP",
+            "label": "RECEIPT_FTP",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "Producer | TransactionType"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "Producer | TransactionType",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "Mailbox",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "ProfileID",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "DeleteAfterCollect(Yes|No)",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "ConnectionZone(INT|DMZ)",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "ChangeDirectory | PreReceiptBP",
+                    "required": true
+                },
+                {
+                    "source": "text6",
+                    "label": "CollectZeroByteFiles(Yes|No) | PostReceiptBP",
+                    "required": true
+                },
+                {
+                    "source": "text7",
+                    "label": "UnprocessedDirectory"
+                },
+                {
+                    "source": "text8",
+                    "label": "ProcessDiffTransTypes(Yes|No)|ProcessOriginalEDI(Yes|No)",
+                    "required": true
+                },
+                {
+                    "source": "text9",
+                    "label": "FileMask",
+                    "required": true
+                }         
+            ]
+        },      
+        {
+            "name" : "EVC_RECEIPT_WEBSERVICE",
+            "label": "RECEIPT_WEBSERVICE",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "ServiceName"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName",
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "Mailbox",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "BPTransactionType",
+                    "required": true
+                },
+                {
+                    "source": "text6",
+                    "label": "PostReceiptBP"
+                },
+                {
+                    "source": "text7",
+                    "label": "UnprocessedDirectory"
                 },
                 {
                     "source": "text8",
                     "label": "ProcessDiffTransTypes(Yes|No)|ProcessOriginalEDI(Yes|No)"
-                }          
+                }        
+            ]
+        },      
+        {
+            "name" : "EVC_BATCH_RECEIPT_VARIABLES",
+            "label": "RECEIPT_VARIABLES",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | TransactionType"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | TransactionType",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "Variable1"
+                },
+                {
+                    "source": "text2",
+                    "label": "Variable2"
+                },
+                {
+                    "source": "text3",
+                    "label": "Variable3"
+                },
+                {
+                    "source": "text4",
+                    "label": "Variable4"
+                },
+                {
+                    "source": "text5",
+                    "label": "Variable5"
+                },  
+                {
+                    "source": "text6",
+                    "label": "Variable6"
+                },
+                {
+                    "source": "text7",
+                    "label": "Variable7"
+                },
+                {
+                    "source": "text8",
+                    "label": "Variable8"
+                },
+                {
+                    "source": "text9",
+                    "label": "Variable9"
+                }    
+            ]
+        },
+        {
+            "name" : "EVC_ARCHIVE_PRODUCER",
+            "label": "ARCHIVE_PRODUCER",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "TransactionType"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName",
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "TransactionType",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "ArchiveDirectory",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RenamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "StringToReplace|ReplaceStringWith"
+                },
+                {
+                    "source": "text4",
+                    "label": "StringToCheck|StringToAppend"
+                }      
+            ]
+        },
+        {
+            "name" : "EVC_CONSUMERLOOKUP",
+            "label": "CONSUMER_LOOKUP",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | TransactionType | Config"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Regular Expression"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 3
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Regular Expression",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "ConsumerName",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "ConsumerName"
+                },
+                {
+                    "source": "text3",
+                    "label": "ConsumerName"
+                },
+                {
+                    "source": "text4",
+                    "label": "ConsumerName"
+                },
+                {
+                    "source": "text5",
+                    "label": "ConsumerName"
+                },
+                {
+                    "source": "text6",
+                    "label": "ConsumerName"
+                },
+                {
+                    "source": "text7",
+                    "label": "ConsumerName"
+                },
+                {
+                    "source": "text8",
+                    "label": "ConsumerName"
+                },
+                {
+                    "source": "text9",
+                    "label": "ConsumerName"
+                }   
+            ]
+        },
+        {
+            "name" : "EVC_BATCH_TRANSLATION",
+            "label": "BATCH_TRANSLATION",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "TranslationType"
+                },
+                {
+                    "source": "text2",
+                    "label": "TranslationMap"
+                },
+                {
+                    "source": "text3",
+                    "label": "PreTransBP"
+                },
+                {
+                    "source": "text4",
+                    "label": "PostTransBP"
+                },
+                {
+                    "source": "text5",
+                    "label": "NumberOfOutputCards"
+                },
+                {
+                    "source": "text6",
+                    "label": "validate_input(YES|NO)|validate_output(YES|NO)"
+                },
+                {
+                    "source": "text8",
+                    "label": "SendPartialEDI(Yes|No)"
+                } 
+            ]
+        },      
+        {
+            "name" : "EVC_BATCH_TRANSLATION_VARIABLES",
+            "label": "TRANS_VARIABLES",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "TransactionType"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "Variable1"
+                },
+                {
+                    "source": "text2",
+                    "label": "Variable2"
+                },
+                {
+                    "source": "text3",
+                    "label": "Variable3"
+                },
+                {
+                    "source": "text4",
+                    "label": "Variable4"
+                },
+                {
+                    "source": "text5",
+                    "label": "Variable5"
+                },  
+                {
+                    "source": "text6",
+                    "label": "Variable6"
+                },
+                {
+                    "source": "text7",
+                    "label": "Variable7"
+                },
+                {
+                    "source": "text8",
+                    "label": "Variable8"
+                },
+                {
+                    "source": "text9",
+                    "label": "Variable9"
+                }    
+            ]
+        },
+        {
+            "name" : "EVC_BATCH_MULTIPLE_INPUTS",
+            "label": "MULTIPLE_INPUTS",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType | CardNumber"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType | CardNumber",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "UnProcessedDirectory",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "CollectionDirectory",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "DeleteAfterCollect(Yes|No)",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "CollectFromSubFolders(Yes|No)",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "FileModifiedThreshold",
+                    "required": true
+                },
+                {
+                    "source": "text6",
+                    "label": "CollectZeroByteFiles(Yes|No)",
+                    "required": true
+                },
+                {
+                    "source": "text7",
+                    "label": "ArchiveDirectory",
+                    "required": true
+                },
+                {
+                    "source": "text8",
+                    "label": "ArchiveFileNamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text9",
+                    "label": "FileMask",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name" : "EVC_BATCH_MULTIPLE_OUTPUTS",
+            "label": "MULTIPLE_OUTPUTS",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType | CardNumber"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType | CardNumber",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "DeliveryPath",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RenamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "StringToReplace | StringToReplaceWith",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "StringToCheck | StringToAppend",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "PreCommsBP"
+                },
+                {
+                    "source": "text6",
+                    "label": "PostCommsBP"
+                }
+            ]
+        },
+        {
+            "name" : "EVC_BATCH_BURST_INPUT",
+            "label": "BURST_INPUT",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "FetchUnit",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RawDataDropDir",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "Script (Used to merge bursted output files)",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "ScriptParameters"
+                },
+                {
+                    "source": "text5",
+                    "label": "RawData RejectsDropDir"
+                },
+                {
+                    "source": "text6",
+                    "label": "RejectsEmailId"
+                }
+            ]
+        },
+        {
+            "name" : "EVC_BATCH_BURST_OUTPUT",
+            "label": "BURST_OUTPUT",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType | OuputFileNumber"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text8",
+                    "label": "MergedFileMask",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name" : "EVC_BATCH_BURST_OUTPUTS",
+            "label": "BURST_OUTPUTS",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType | OuputFileNumber"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "DeliveryPath",
+                    "required": true
+                },
+                {
+                    "source": "text1",
+                    "label": "DeliveryPath",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RenamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "StringToReplace | StringToReplaceWith",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "StringToCheck | StringToAppend",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "Pre-Comm BP"
+                },
+                {
+                    "source": "text6",
+                    "label": "Post-Comm BP"
+                },
+                {
+                    "source": "text8",
+                    "label": "MergedFileMask"
+                }
+            ]
+        },
+        {
+            "name" : "EVC_ARCHIVE_CONSUMER",
+            "label": "ARCHIVE_CONSUMER",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "required": true,
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "DeliveryPath",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RenamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "StringToReplace | StringToReplaceWith",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "StringToCheck | StringToAppend",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "name" : "EVC_DELIVERY_FILESYSTEM",
+            "label": "DELIVERY_FILESYSTEM",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "DeliveryPath",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RenamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "StringToReplace | StringToReplaceWith",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "StringToCheck | StringToAppend",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "PreCommsBP"
+                },  
+                {
+                    "source": "text6",
+                    "label": "PostCommsBP"
+                }  
+            ]
+        },
+        {
+            "name" : "EVC_DELIVERY_SFTP",
+            "label": "DELIVERY_SFTP",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "ChangeDirectoryPath",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RenamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "StringToReplace | StringToReplaceWith",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "StringToCheck | StringToAppend",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "PreCommsBP"
+                },  
+                {
+                    "source": "text6",
+                    "label": "PostCommsBP"
+                },  
+                {
+                    "source": "text7",
+                    "label": "SSHRemoteProfileID"
+                },  
+                {
+                    "source": "text8",
+                    "label": "ConnectionZone (INT|DMZ)"
+                } 
+            ]
+        },
+        {
+            "name" : "EVC_DELIVERY_FTP",
+            "label": "DELIVERY_FTP",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "ChangeDirectoryPath",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RenamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "StringToReplace | StringToReplaceWith",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "StringToCheck | StringToAppend",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "PreCommsBP"
+                },  
+                {
+                    "source": "text6",
+                    "label": "PostCommsBP"
+                },  
+                {
+                    "source": "text7",
+                    "label": "SSHRemoteProfileID"
+                },  
+                {
+                    "source": "text8",
+                    "label": "ConnectionZone (INT|DMZ)"
+                } 
+            ]
+        },
+        {
+            "name" : "EVC_DELIVERY_EMAIL",
+            "label": "DELIVERY_EMAIL",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "SentTo",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "RenamePattern",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "StringToReplace | StringToReplaceWith",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "StringToCheck | StringToAppend",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "PreCommsBP"
+                },  
+                {
+                    "source": "text6",
+                    "label": "PostCommsBP"
+                },  
+                {
+                    "source": "text7",
+                    "label": "SendFrom"
+                },  
+                {
+                    "source": "text8",
+                    "label": "EmailSubject"
+                },  
+                {
+                    "source": "text9",
+                    "label": "Attachment|emailBody"
+                } 
+            ]
+        },
+        {
+            "name" : "EVC_DELIVERY_EMAILAUDIT",
+            "label": "DELIVERY_EMAILAUDIT",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "EDITransactionType|Config",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "SuccessSendTo",
+                    "required": true
+                },
+                {
+                    "source": "text2",
+                    "label": "SuccessSendFrom",
+                    "required": true
+                },
+                {
+                    "source": "text3",
+                    "label": "SuccessSubject",
+                    "required": true
+                },
+                {
+                    "source": "text4",
+                    "label": "SuccessAttachments",
+                    "required": true
+                },
+                {
+                    "source": "text5",
+                    "label": "FailureSendTo",
+                    "required": true
+                },  
+                {
+                    "source": "text6",
+                    "label": "FailureSendFrom",
+                    "required": true
+                },  
+                {
+                    "source": "text7",
+                    "label": "FailureSubject",
+                    "required": true
+                },  
+                {
+                    "source": "text8",
+                    "label": "FailureAttachments",
+                    "required": true
+                },  
+                {
+                    "source": "text9",
+                    "label": "XSLT",
+                    "required": true
+                } 
+            ]
+        },      
+        {
+            "name" : "EVC_BATCH_DELIVERY_VARIABLES",
+            "label": "DELIVERY_VARIABLES",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "TransactionType"
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                }
+            ],           
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "ProducerName | ConsumerName",
+                    "isPipeDelimited": true,
+                    "pipeDelimitedFields": 2,
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "Config",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "Description"
+                },
+                {
+                    "source": "text1",
+                    "label": "Variable1"
+                },
+                {
+                    "source": "text2",
+                    "label": "Variable2"
+                },
+                {
+                    "source": "text3",
+                    "label": "Variable3"
+                },
+                {
+                    "source": "text4",
+                    "label": "Variable4"
+                },
+                {
+                    "source": "text5",
+                    "label": "Variable5"
+                },  
+                {
+                    "source": "text6",
+                    "label": "Variable6"
+                },
+                {
+                    "source": "text7",
+                    "label": "Variable7"
+                },
+                {
+                    "source": "text8",
+                    "label": "Variable8"
+                },
+                {
+                    "source": "text9",
+                    "label": "Variable9"
+                }
+            ]
+        },
+        {
+            "name" : "EVC_KR_TEST",
+            "label": "TEST",
+            "list_and_filter": [
+                {
+                    "source": "senderCode",
+                    "label": "senderCode"
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "receiverCode"
+                },
+                {
+                    "source": "description",
+                    "label": "description"
+                }
+            ],
+            "create_and_edit": [
+                {
+                    "source": "senderCode",
+                    "label": "senderCode",
+                    "required": true
+                },
+                {
+                    "source": "receiverCode",
+                    "label": "receiverCode",
+                    "required": true
+                },
+                {
+                    "source": "description",
+                    "label": "description"
+                }               
             ]
         }
     ]

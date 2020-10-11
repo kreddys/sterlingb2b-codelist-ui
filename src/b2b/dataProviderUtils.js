@@ -72,14 +72,14 @@ export const getOneB2BCodelistEntry = async function getOneB2BCodelistEntry(reso
     headers.set('Authorization', authHeader);  
 
     const configuration = _.find(config.codelists, ['name', resource]);
-    const senderCodeConfig = _.find(configuration.edit, ['source', 'senderCode']);
-    const receiverCodeConfig = _.find(configuration.edit, ['source', 'receiverCode']);
+    const senderCodeConfig = _.find(configuration.create_and_edit, ['source', 'senderCode']);
+    const receiverCodeConfig = _.find(configuration.create_and_edit, ['source', 'receiverCode']);
 
     let pipeCount = 0;
     const listName = resource;
     pipeCount = pipeCount + 1;
-    pipeCount = pipeCount + 1; //senderName
-    pipeCount = pipeCount + 1; //receiverName
+    pipeCount = pipeCount + 1; //senderId
+    pipeCount = pipeCount + 1; //receiverId
     
     const listVersion = -1;
     pipeCount = pipeCount + 1;
@@ -87,25 +87,25 @@ export const getOneB2BCodelistEntry = async function getOneB2BCodelistEntry(reso
     let senderCode= '';
     let receiverCode = '';
 
-    if(senderCodeConfig.ispipeDelimited){
-        for (var i = pipeCount; i < pipeCount + senderCodeConfig.fields; i++) {
+    if(senderCodeConfig.isPipeDelimited){
+        for (var i = pipeCount; i < pipeCount + senderCodeConfig.pipeDelimitedFields; i++) {
             senderCode = senderCode + '|' +  params.id.split("|")[i];
           }
           
           senderCode = senderCode.substr(1);
-          pipeCount = pipeCount + senderCodeConfig.fields
+          pipeCount = pipeCount + senderCodeConfig.pipeDelimitedFields
     }else{
         senderCode = params.id.split("|")[4];
-        pipeCount = pipeCount + senderCodeConfig.fields        
+        pipeCount = pipeCount + senderCodeConfig.pipeDelimitedFields        
     }
 
-    if(receiverCodeConfig.ispipeDelimited){
-        for (var j = pipeCount; j < pipeCount + receiverCodeConfig.fields; j++) {
+    if(receiverCodeConfig.isPipeDelimited){
+        for (var j = pipeCount; j < pipeCount + receiverCodeConfig.pipeDelimitedFields; j++) {
             receiverCode = receiverCode + '|' +  params.id.split("|")[j];
           }
           
           receiverCode = receiverCode.substr(1);
-          pipeCount = pipeCount + receiverCodeConfig.fields
+          pipeCount = pipeCount + receiverCodeConfig.pipeDelimitedFields
     }else{
         receiverCode = params.id.split("|")[pipeCount];
     }
@@ -117,6 +117,8 @@ export const getOneB2BCodelistEntry = async function getOneB2BCodelistEntry(reso
         receiverCode,
     };
 
+    console.log(query)
+
     const url = `${apiUrl}?${stringify(query)}`;
 
     const response = await fetch(url, {headers});
@@ -127,4 +129,83 @@ export const getOneB2BCodelistEntry = async function getOneB2BCodelistEntry(reso
     return {
         data : reformatted[0]
     }
+}
+
+export const createOneB2BCodelistEntry = async function createOneB2BCodelistEntry(resource, params) {
+
+    let headers = new Headers({ Accept: 'application/json', 'content-type': 'application/json' });
+    const authHeader = localStorage.getItem('AuthHeader');
+    headers.set('Authorization', authHeader);
+
+    const query = {
+        listName : resource,
+        listVersion : -1,       
+    };
+
+    const url = `${apiUrl}?${stringify(query)}`;
+
+    const response = await fetch(url, {headers});
+    const data = await response.json();
+
+    const listVersion = data[0]._id.split("|")[3]
+
+    const CodeList = resource + "|||" + listVersion
+
+    const createData = {
+        CodeList,
+        codeSet: [
+            params.data
+        ]
+    }
+
+    const createUrl = `${apiUrl}`;
+
+    const createResponse = await fetch(createUrl, {headers,
+                                    method: 'POST',
+                                    body:  JSON.stringify(createData),
+                                    });
+    await createResponse.json();
+
+    return {
+        data : params.data
+    }
+
+}
+
+export const deleteOneB2BCodelistEntry = async function deleteOneB2BCodelistEntry(resource, params) {
+
+    let headers = new Headers({ Accept: 'application/json', 'content-type': 'application/json' });
+    const authHeader = localStorage.getItem('AuthHeader');
+    headers.set('Authorization', authHeader);
+
+    const url = `${apiUrl}${(params.id)}`;
+
+    await fetch(url, {headers,
+        method: 'DELETE',
+        });
+
+    return {
+        data : params.previousData
+    }
+
+}
+
+export const updateOneB2BCodelistEntry = async function updateOneB2BCodelistEntry(resource, params) {
+
+    let headers = new Headers({ 'content-type': 'application/json'});
+    const authHeader = localStorage.getItem('AuthHeader');
+    headers.set('Authorization', authHeader);
+
+    const url = `${apiUrl}${(params.id)}`;
+
+    await fetch(url, {headers,
+        method: 'PUT',
+        body: JSON.stringify(params.data),
+        mode: 'cors'
+        });
+
+    return {
+        data : params.data
+    }
+
 }

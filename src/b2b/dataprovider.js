@@ -1,6 +1,6 @@
 import { stringify } from 'query-string';
 import config from '../config/config.json';
-import {getListB2BCodelistEntries, getOneB2BCodelistEntry} from './dataProviderUtils'
+import {getListB2BCodelistEntries, getOneB2BCodelistEntry, createOneB2BCodelistEntry, deleteOneB2BCodelistEntry, updateOneB2BCodelistEntry} from './dataProviderUtils'
 
 const apiUrl = config.b2b_rest_endpoint;
 
@@ -21,41 +21,22 @@ export default {
     getOne: (resource, params) => {
 
         return getOneB2BCodelistEntry(resource, params);
+    },
+
+    create: (resource, params) => {
+
+        return createOneB2BCodelistEntry(resource, params);
+    },
+
+    delete: (resource, params) => {
+
+        return deleteOneB2BCodelistEntry(resource, params);
+    },
+
+    update: (resource, params) => {
+
+        return updateOneB2BCodelistEntry(resource, params);
     }
- 
-
-    // getMany: (resource, params) => {
-    //     const query = {
-    //         filter: JSON.stringify({ id: params.ids }),
-    //     };
-    //     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    //     return httpClient(url).then(({ json }) => ({ data: json }));
-    // },
-
-    // getManyReference: (resource, params) => {
-    //     const { page, perPage } = params.pagination;
-    //     const { field, order } = params.sort;
-    //     const query = {
-    //         sort: JSON.stringify([field, order]),
-    //         range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-    //         filter: JSON.stringify({
-    //             ...params.filter,
-    //             [params.target]: params.id,
-    //         }),
-    //     };
-    //     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-
-    //     return httpClient(url).then(({ headers, json }) => ({
-    //         data: json,
-    //         total: getTotalCodeCount(resource,params),
-    //     }));
-    // },
-
-    // update: (resource, params) =>
-    //     httpClient(`${apiUrl}/${resource}/${params.id}`, {
-    //         method: 'PUT',
-    //         body: JSON.stringify(params.data),
-    //     }).then(({ json }) => ({ data: json })),
 
     // updateMany: (resource, params) => {
     //     const query = {
@@ -66,14 +47,6 @@ export default {
     //         body: JSON.stringify(params.data),
     //     }).then(({ json }) => ({ data: json }));
     // },
-
-    // create: (resource, params) =>
-    //     httpClient(`${apiUrl}/${resource}`, {
-    //         method: 'POST',
-    //         body: JSON.stringify(params.data),
-    //     }).then(({ json }) => ({
-    //         data: { ...params.data, id: json.id },
-    //     })),
 
     // delete: (resource, params) =>
     //     httpClient(`${apiUrl}/${resource}/${params.id}`, {
