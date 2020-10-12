@@ -81,7 +81,7 @@ export const getOneB2BCodelistEntry = async function getOneB2BCodelistEntry(reso
     pipeCount = pipeCount + 1; //senderId
     pipeCount = pipeCount + 1; //receiverId
     
-    const listVersion = -1;
+    const listVersion = _.find(config.codelists, function(o) { return o.name === resource; }).listVersion || -1;
     pipeCount = pipeCount + 1;
 
     let senderCode= '';
@@ -139,7 +139,7 @@ export const createOneB2BCodelistEntry = async function createOneB2BCodelistEntr
 
     const query = {
         listName : resource,
-        listVersion : -1,       
+        listVersion : _.find(config.codelists, function(o) { return o.name === resource; }).listVersion || -1,       
     };
 
     const url = `${apiUrl}?${stringify(query)}`;
