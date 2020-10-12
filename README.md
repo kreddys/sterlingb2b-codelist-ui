@@ -1,9 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://upload.wikimedia.org/wikipedia/commons/a/a7">
-    <img src="React-icon.svg" alt="Logo" width="80" height="80">
-  </a>
+    <img src="https://3ulsmb4eg8vz37c0vz2si64j-wpengine.netdna-ssl.com/wp-content/uploads/2019/05/react-native-UX-design.gif" alt="logo" width="40%" />
 
   <h3 align="center">sterlingb2b-codelist-ui</h3>
 
@@ -50,6 +48,8 @@ Using this tool, You can:
 This user interface is also secured with a login page. To view the codelists, You need to login with the same credentials you login to Sterling dashboard.
 
 [![Codelist in Sterling Integrator][sterling-b2b-codelist]](https://example.com)
+
+
 [![Codelist in sterlingb2b-codelist-ui][react-admin-list]](https://example.com)
 
 * Some more screenshots are added to examples folder.
@@ -75,7 +75,7 @@ This tool is built on react-admin (frontend framework for any rest backend) by u
 * CORS Unblock add-on for browser
 	* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/cors-unblock/)
 	* [Chrome](https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino?hl=en)
-*Add `API User` permission to the sterling's User Account accessing the User Interface
+* Add `API User` permission to the sterling's User Account accessing the User Interface
 
 ### Installation
 
@@ -98,7 +98,7 @@ yarn install
 npm run start
 ```
 
-##config.json
+## config.json
 
 * b2b_rest_endpoint --> your sterling b2b's codelistcodes api url (http://sterlingb2bservername:20074/B2BAPIs/svc/codelistcodes/)
 * replace_pipe_with --> harcoded to *
