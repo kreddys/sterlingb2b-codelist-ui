@@ -2,6 +2,7 @@
   "name": "sterlingb2b-codelist-ui",
   "version": "0.1.0",
   "private": true,
+  "author": "Kishore Reddy",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -16,6 +17,16 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
+  "license": "MIT",
+  "keywords": [
+    "Sterling B2B Integrator",
+    "Sterling",
+    "Sterling Integrator",
+    "B2B",
+    "Codelists",
+    "react-admin",
+    "B2B Rest API"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

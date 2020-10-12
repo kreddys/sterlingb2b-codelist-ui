@@ -1,3 +1,5 @@
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -6,7 +8,7 @@
   <h3 align="center">sterlingb2b-codelist-ui</h3>
 
   <p align="center">
-    User Interface to Create, Read, Update & Delete Codelist entries in Sterling B2B Integrator
+    User Interface to easily Create, Read, Update, Delete & Clone Codelist entries in Sterling B2B Integrator
     <br />
   </p>
 </p>
@@ -21,7 +23,7 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [config.json](#config.json)
+* [config.json](#Config)
 * [Usage](#usage)
 * [Future Enhancements](#future-enhancements)
 * [Contributing](#contributing)
@@ -47,9 +49,10 @@ Using this tool, You can:
 
 This user interface is also secured with a login page. To view the codelists, You need to login with the same credentials you login to Sterling dashboard.
 
+**Codelist in Sterling B2B's dashboard**
 [![Codelist in Sterling Integrator][sterling-b2b-codelist]](https://example.com)
 
-
+**Codelist in react-admin User Interface, With Filter Option**
 [![Codelist in sterlingb2b-codelist-ui][react-admin-list]](https://example.com)
 
 * Some more screenshots are added to examples folder.
@@ -98,7 +101,7 @@ yarn install
 npm run start
 ```
 
-## config.json
+## Config
 
 * b2b_rest_endpoint --> your sterling b2b's codelistcodes api url (http://sterlingb2bservername:20074/B2BAPIs/svc/codelistcodes/)
 * replace_pipe_with --> harcoded to *
@@ -146,7 +149,7 @@ npm run start
 * Versioning Support
 * Add Export & Import functionality for codelistcodes.
 * ReadOnly access support for User accounts
-
+* Add support for codelists that contain pipe(|) in SenderCode or ReceiverCode
 
 ## Contributing
 
