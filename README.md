@@ -168,12 +168,6 @@ Any contributions you make are **greatly appreciated**.
 Distributed under the MIT License.
 
 
-## Contact
-
-Kishore Reddy - kvkishorereddy@yahoo.com
-
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kishore-reddy-8309b235/
