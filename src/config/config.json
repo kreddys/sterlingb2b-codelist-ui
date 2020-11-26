@@ -1,11 +1,11 @@
 {
-    "b2b_rest_endpoint" : "http://sterlingb2bservername:20074/B2BAPIs/svc/codelistcodes/",
+	"b2b_rest_endpoint_codelistcodes" : "http://sterlingb2bservername:20074/B2BAPIs/svc/codelistcodes/",
+    "b2b_rest_endpoint_codelists" : "http://sterlingb2bservername:20074/B2BAPIs/svc/codelists/",
     "replace_pipe_with" :"*",
     "codelists": [
        {
             "name" : "PREMIER_LEAGUE_PLAYERS_2018_19",
             "label": "PLAYERS",
-            "listVersion": 2,
             "list_and_filter": [
                 {
                     "source": "senderCode",
@@ -99,7 +99,6 @@
         {
             "name" : "PREMIER_LEAGUE_TEAMS_2018_19",
             "label": "TEAMS",
-            "listVersion": 2,
             "list_and_filter": [
                 {
                     "source": "senderCode",

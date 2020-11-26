@@ -2,7 +2,8 @@ import _ from 'lodash';
 import { stringify } from 'query-string';
 import config from '../config/config.json';
 
-const apiUrl = config.b2b_rest_endpoint;
+const apiUrl = config.b2b_rest_endpoint_codelistcodes;
+const apiUrlCodelists = config.b2b_rest_endpoint_codelists;
 
 const reformatB2BResponse = (codelistcodes) => {
 
@@ -25,12 +26,39 @@ const reformatB2BResponse = (codelistcodes) => {
     return reformatted;
 };
 
-export const getListB2BCodelistEntries = async function getListB2BCodelistEntries(url, filter, pagination) 
+const getDefaultListVersion = async function getDefaultListVersion(resource){
+
+    let headers = new Headers({ Accept: 'application/json' });
+    const authHeader = localStorage.getItem('AuthHeader');
+    headers.set('Authorization', authHeader);
+
+    const query = {
+        _include : "codeListName,listStatus,userName,versionNumber",
+        codeListName : resource,       
+        versionNumber : -1
+    };
+
+    const url = `${apiUrlCodelists}?${stringify(query)}`;
+
+    const response = await fetch(url, {headers});
+    const data = await response.json();
+
+    return data[0].versionNumber;
+}
+
+export const getListB2BCodelistEntries = async function getListB2BCodelistEntries(resource, filter, pagination) 
 {
 
     let headers = new Headers({ Accept: 'application/json' });
     const authHeader = localStorage.getItem('AuthHeader');
     headers.set('Authorization', authHeader);
+
+    const query = {
+        listName: resource,
+        listVersion: await getDefaultListVersion(resource)
+        };
+
+    const url = `${apiUrl}?${stringify(query)}`;
 
     const response = await fetch(url, {headers});
     const data = await response.json();
@@ -81,7 +109,8 @@ export const getOneB2BCodelistEntry = async function getOneB2BCodelistEntry(reso
     pipeCount = pipeCount + 1; //senderId
     pipeCount = pipeCount + 1; //receiverId
     
-    const listVersion = _.find(config.codelists, function(o) { return o.name === resource; }).listVersion || -1;
+    //const listVersion = -1;
+    const listVersion = await getDefaultListVersion(resource);
     pipeCount = pipeCount + 1;
 
     let senderCode= '';
@@ -117,8 +146,6 @@ export const getOneB2BCodelistEntry = async function getOneB2BCodelistEntry(reso
         receiverCode,
     };
 
-    console.log(query)
-
     const url = `${apiUrl}?${stringify(query)}`;
 
     const response = await fetch(url, {headers});
@@ -139,7 +166,7 @@ export const createOneB2BCodelistEntry = async function createOneB2BCodelistEntr
 
     const query = {
         listName : resource,
-        listVersion : _.find(config.codelists, function(o) { return o.name === resource; }).listVersion || -1,       
+        listVersion : await getDefaultListVersion(resource),       
     };
 
     const url = `${apiUrl}?${stringify(query)}`;

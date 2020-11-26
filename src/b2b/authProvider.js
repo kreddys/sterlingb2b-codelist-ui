@@ -1,7 +1,7 @@
 import config from '../config/config.json';
 import base64 from 'base-64';
 
-const apiUrl = config.b2b_rest_endpoint;
+const apiUrl = config.b2b_rest_endpoint_codelistcodes;
 
 async function b2bAuthenticate (url, username, password){
     let headers = new Headers({ Accept: 'application/json' });

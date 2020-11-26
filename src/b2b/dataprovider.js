@@ -1,22 +1,10 @@
-import { stringify } from 'query-string';
-import config from '../config/config.json';
-import {getListB2BCodelistEntries, getOneB2BCodelistEntry, createOneB2BCodelistEntry, deleteOneB2BCodelistEntry, updateOneB2BCodelistEntry} from './dataProviderUtils';
-import _ from 'lodash';
+import {getListB2BCodelistEntries, getOneB2BCodelistEntry, createOneB2BCodelistEntry, deleteOneB2BCodelistEntry, updateOneB2BCodelistEntry} from './dataProviderUtils'
 
-const apiUrl = config.b2b_rest_endpoint;
 
 export default {
     getList: (resource, params) => {
 
-        const query = {
-            listName: resource,
-            listVersion: _.find(config.codelists, function(o) { return o.name === resource; }).listVersion || -1
-        };
-
-        const url = `${apiUrl}?${stringify(query)}`;
-
-        return getListB2BCodelistEntries(url, params.filter, params.pagination)
-
+        return getListB2BCodelistEntries(resource, params.filter, params.pagination)
     },
 
     getOne: (resource, params) => {
