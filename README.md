@@ -104,7 +104,7 @@ npm run start
 ## Config
 
 * b2b_rest_endpoint_codelistcodes --> your sterling b2b's codelistcodes api url (http://sterlingb2bservername:20074/B2BAPIs/svc/codelistcodes/)
-* b2b_rest_endpoint_codelists --> your sterling b2b's codelistcodes api url (http://ehatldv1sfg01.innovate.lan:20074/B2BAPIs/svc/codelists/)
+* b2b_rest_endpoint_codelists --> your sterling b2b's codelistcodes api url (http://sterlingb2bservername:20074/B2BAPIs/svc/codelists/)
 * replace_pipe_with --> harcoded to *
 * codelists[		--> List all the codelists that you need displayed in the User Interface
 	{
